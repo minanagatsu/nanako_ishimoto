@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>nanako_ishimoto</title>
+    <title>画像表示実験</title>
     <style>
         .hidden { display: none; }
+        #currentImage {
+            height: 800px; /* 高さを300pxに固定 */
+            width: auto; /* 幅はアスペクト比に基づいて自動調整 */
+        }
     </style>
-
+</head>
 <body>
     <div id="imageArea">
-        <img id="currentImage" src="" alt="画像" width="500">
+        <img id="currentImage" src="" alt="画像">
     </div>
     <div id="paginationArea">
         <span id="pageNumber">1</span>
@@ -42,19 +45,18 @@
                 document.getElementById('pageNumber').innerText = currentIndex + 1;
             } else {
                 document.getElementById('imageArea').classList.add('hidden');
-document.getElementById('paginationArea').classList.add('hidden');
-document.getElementById('endMessage').classList.remove('hidden');
-}
-}
-    // 初期画像を表示
-    showImage();
-
-    // 「次へ」ボタンのクリックイベント
-    document.getElementById('nextButton').addEventListener('click', () => {
-        currentIndex++;
+                document.getElementById('paginationArea').classList.add('hidden');
+                document.getElementById('endMessage').classList.remove('hidden');
+            }
+        }
+        // 初期画像を表示
         showImage();
-    });
-</script>
 
+        // 「次へ」ボタンのクリックイベント
+        document.getElementById('nextButton').addEventListener('click', () => {
+            currentIndex++;
+            showImage();
+        });
+    </script>
 </body>
 </html>
