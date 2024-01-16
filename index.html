@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>nanako_ishimoto</title>
+    <style>
+        .hidden { display: none; }
+    </style>
+
+<body>
+    <div id="imageArea">
+        <img id="currentImage" src="" alt="画像" width="500">
+    </div>
+    <div id="paginationArea">
+        <span id="pageNumber">1</span>
+        <button id="nextButton">次へ</button>
+    </div>
+    <div id="endMessage" class="hidden">
+        ありがとうございました。これで実験は終わりです。
+    </div>
+
+    <script>
+        // 画像ファイルのパスを配列で定義
+        const images = [];
+        const folders = ['random_select', 'vgg', 'recommend'];
+        const numImages = 20; // 各フォルダからの画像数
+
+        // 各フォルダから画像を順番に追加
+        for (let i = 1; i <= numImages; i++) {
+            folders.forEach(folder => {
+                images.push(`picture/${folder}/image${i}.jpg`);
+            });
+        }
+
+        let currentIndex = 0; // 現在の画像インデックス
+        const totalImages = images.length; // 画像の総数
+
+        // 画像を表示する関数
+        function showImage() {
+            if (currentIndex < totalImages) {
+                document.getElementById('currentImage').src = images[currentIndex];
+                document.getElementById('pageNumber').innerText = currentIndex + 1;
+            } else {
+                document.getElementById('imageArea').classList.add('hidden');
+document.getElementById('paginationArea').classList.add('hidden');
+document.getElementById('endMessage').classList.remove('hidden');
+}
+}
+    // 初期画像を表示
+    showImage();
+
+    // 「次へ」ボタンのクリックイベント
+    document.getElementById('nextButton').addEventListener('click', () => {
+        currentIndex++;
+        showImage();
+    });
+</script>
+
+</body>
+</html>
